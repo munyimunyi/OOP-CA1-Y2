@@ -1,0 +1,26 @@
+# NetBeans
+nbproject/private/
+nbproject/Makefile-*.mk
+nbproject/Package-*.bash
+nbactions.xml
+nb-configuration.xml
+build/
+nbbuild/
+dist/
+nbdist/
+
+# Java compiled files
+*.class
+
+# Logs and crash files
+*.log
+hs_err_pid*
+replay_pid*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Other IDE folders
+.idea/
+.vscode/
