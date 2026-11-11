@@ -7,8 +7,6 @@ package foodbridge;
 /**
  *
  * @author SWitkowski
- * @author UcheUche
- * @author EthanLorenzo
  */
 public class FoodBridgeApp {
 

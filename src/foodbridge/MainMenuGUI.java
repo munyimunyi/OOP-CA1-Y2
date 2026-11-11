@@ -4,6 +4,10 @@
  */
 package foodbridge;
 
+import foodbridge.volunteers.HomeGUI;
+import foodbridge.fooddonations.FoodDonationGUI;
+import foodbridge.foodrequest.FoodRequestMenu;
+
 /**
  *
  * @author SWitkowski
@@ -30,7 +34,7 @@ public class MainMenuGUI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         foodDonationPage = new javax.swing.JButton();
-        foodDeliveryPage = new javax.swing.JButton();
+        foodRequestsPage = new javax.swing.JButton();
         volunteerPage = new javax.swing.JButton();
         placeBottom = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         exitBtn = new javax.swing.JButton();
@@ -57,8 +61,13 @@ public class MainMenuGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         getContentPane().add(foodDonationPage, gridBagConstraints);
 
-        foodDeliveryPage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        foodDeliveryPage.setText("Food Delivery");
+        foodRequestsPage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        foodRequestsPage.setText("Food Requests");
+        foodRequestsPage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                foodRequestsPageMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -67,10 +76,15 @@ public class MainMenuGUI extends javax.swing.JFrame {
         gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(foodDeliveryPage, gridBagConstraints);
+        getContentPane().add(foodRequestsPage, gridBagConstraints);
 
         volunteerPage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         volunteerPage.setText("Volunteers");
+        volunteerPage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volunteerPageMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -120,6 +134,20 @@ public class MainMenuGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitBtnMouseClicked
 
+    private void volunteerPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volunteerPageMouseClicked
+        HomeGUI hgui = new HomeGUI();
+		hgui.setLocation(this.getLocation());
+		hgui.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_volunteerPageMouseClicked
+
+    private void foodRequestsPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_foodRequestsPageMouseClicked
+        FoodRequestMenu frm = new FoodRequestMenu();
+		frm.setLocation(this.getLocation());
+		frm.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_foodRequestsPageMouseClicked
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -147,8 +175,8 @@ public class MainMenuGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitBtn;
-    private javax.swing.JButton foodDeliveryPage;
     private javax.swing.JButton foodDonationPage;
+    private javax.swing.JButton foodRequestsPage;
     private javax.swing.Box.Filler placeBottom;
     private javax.swing.JButton volunteerPage;
     // End of variables declaration//GEN-END:variables
