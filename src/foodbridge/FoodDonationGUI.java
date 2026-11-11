@@ -30,6 +30,7 @@ public class FoodDonationGUI extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         Header = new javax.swing.JPanel();
         headerText = new javax.swing.JLabel();
@@ -41,10 +42,22 @@ public class FoodDonationGUI extends javax.swing.JFrame {
         mainMenu = new javax.swing.JPanel();
         mainMenuLbl = new javax.swing.JLabel();
         infoArea = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        donorName = new javax.swing.JLabel();
+        foodName = new javax.swing.JLabel();
+        foodCategory = new javax.swing.JLabel();
+        quantity = new javax.swing.JLabel();
+        expiryDate = new javax.swing.JLabel();
+        submitBtn = new javax.swing.JButton();
+        verticalGridX0 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        donorNameTF = new javax.swing.JTextField();
+        foodNameTF = new javax.swing.JTextField();
+        foodCategoryCB = new javax.swing.JComboBox<>();
+        quantitySpinner = new javax.swing.JSpinner();
+        unitCB = new javax.swing.JComboBox<>();
+        expiryDateTF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(null);
+        setResizable(false);
         setSize(new java.awt.Dimension(800, 500));
 
         Header.setBackground(new java.awt.Color(222, 166, 58));
@@ -108,6 +121,9 @@ public class FoodDonationGUI extends javax.swing.JFrame {
 
         mainMenu.setBackground(new java.awt.Color(238, 210, 156));
         mainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainMenuMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 mainMenuMouseEntered(evt);
             }
@@ -129,26 +145,140 @@ public class FoodDonationGUI extends javax.swing.JFrame {
         getContentPane().add(Menu, java.awt.BorderLayout.LINE_START);
 
         infoArea.setBackground(new java.awt.Color(255, 252, 216));
+        infoArea.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("donation form");
+        donorName.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        donorName.setText("Donor Name");
+        donorName.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(donorName, gridBagConstraints);
 
-        javax.swing.GroupLayout infoAreaLayout = new javax.swing.GroupLayout(infoArea);
-        infoArea.setLayout(infoAreaLayout);
-        infoAreaLayout.setHorizontalGroup(
-            infoAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(infoAreaLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
-        );
-        infoAreaLayout.setVerticalGroup(
-            infoAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoAreaLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103))
-        );
+        foodName.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        foodName.setText("Food Name");
+        foodName.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(foodName, gridBagConstraints);
+
+        foodCategory.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        foodCategory.setText("Food Category");
+        foodCategory.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(foodCategory, gridBagConstraints);
+
+        quantity.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        quantity.setText("Quantity");
+        quantity.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(quantity, gridBagConstraints);
+
+        expiryDate.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        expiryDate.setText("Expiry Date");
+        expiryDate.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(expiryDate, gridBagConstraints);
+
+        submitBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        submitBtn.setText("Submit");
+        submitBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        submitBtn.setPreferredSize(new java.awt.Dimension(120, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(15, 40, 15, 40);
+        infoArea.add(submitBtn, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 1.0;
+        infoArea.add(verticalGridX0, gridBagConstraints);
+
+        donorNameTF.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(donorNameTF, gridBagConstraints);
+
+        foodNameTF.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(foodNameTF, gridBagConstraints);
+
+        foodCategoryCB.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        foodCategoryCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Canned", "Dry", "Frozen", "Fresh", "Bakery", "Dairy", "Fruit", "Vegetable", "Other" }));
+        foodCategoryCB.setSelectedIndex(-1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(foodCategoryCB, gridBagConstraints);
+
+        quantitySpinner.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(quantitySpinner, gridBagConstraints);
+
+        unitCB.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        unitCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "kg", "grams", "boxes", "meals", "packets", "items" }));
+        unitCB.setSelectedIndex(-1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(unitCB, gridBagConstraints);
+
+        expiryDateTF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        expiryDateTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        expiryDateTF.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
+        infoArea.add(expiryDateTF, gridBagConstraints);
 
         getContentPane().add(infoArea, java.awt.BorderLayout.CENTER);
 
@@ -190,6 +320,13 @@ public class FoodDonationGUI extends javax.swing.JFrame {
 		this.dispose();
     }//GEN-LAST:event_previewDonationMouseClicked
 
+    private void mainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainMenuMouseClicked
+        MainMenuGUI mainMenu = new MainMenuGUI();
+		mainMenu.setLocation(this.getLocation());
+		mainMenu.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_mainMenuMouseClicked
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -220,12 +357,24 @@ public class FoodDonationGUI extends javax.swing.JFrame {
     private javax.swing.JPanel Menu;
     private javax.swing.JLabel donateLbl;
     private javax.swing.JPanel donation;
+    private javax.swing.JLabel donorName;
+    private javax.swing.JTextField donorNameTF;
+    private javax.swing.JLabel expiryDate;
+    private javax.swing.JFormattedTextField expiryDateTF;
+    private javax.swing.JLabel foodCategory;
+    private javax.swing.JComboBox<String> foodCategoryCB;
+    private javax.swing.JLabel foodName;
+    private javax.swing.JTextField foodNameTF;
     private javax.swing.JLabel headerText;
     private javax.swing.JPanel infoArea;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainMenu;
     private javax.swing.JLabel mainMenuLbl;
     private javax.swing.JPanel previewDonation;
     private javax.swing.JLabel previewDonationLbl;
+    private javax.swing.JLabel quantity;
+    private javax.swing.JSpinner quantitySpinner;
+    private javax.swing.JButton submitBtn;
+    private javax.swing.JComboBox<String> unitCB;
+    private javax.swing.Box.Filler verticalGridX0;
     // End of variables declaration//GEN-END:variables
 }

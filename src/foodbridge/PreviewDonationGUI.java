@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  * @author SWitkowski
  */
 public class PreviewDonationGUI extends javax.swing.JFrame {
-	
+
 	private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PreviewDonationGUI.class.getName());
 
 	/**
@@ -30,6 +30,7 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         Header = new javax.swing.JPanel();
         headerText = new javax.swing.JLabel();
@@ -41,10 +42,12 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
         mainMenu = new javax.swing.JPanel();
         mainMenuLbl = new javax.swing.JLabel();
         infoArea = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        previewLbl = new javax.swing.JLabel();
+        previewPane = new javax.swing.JScrollPane();
+        previewTF = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(null);
+        setResizable(false);
         setSize(new java.awt.Dimension(800, 500));
 
         Header.setBackground(new java.awt.Color(222, 166, 58));
@@ -108,6 +111,9 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
 
         mainMenu.setBackground(new java.awt.Color(238, 210, 156));
         mainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainMenuMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 mainMenuMouseEntered(evt);
             }
@@ -130,67 +136,83 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
 
         infoArea.setBackground(new java.awt.Color(255, 252, 216));
         infoArea.setPreferredSize(new java.awt.Dimension(550, 450));
+        infoArea.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("preview form");
+        previewLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        previewLbl.setText("Preview");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoArea.add(previewLbl, gridBagConstraints);
 
-        javax.swing.GroupLayout infoAreaLayout = new javax.swing.GroupLayout(infoArea);
-        infoArea.setLayout(infoAreaLayout);
-        infoAreaLayout.setHorizontalGroup(
-            infoAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(infoAreaLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
-        );
-        infoAreaLayout.setVerticalGroup(
-            infoAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(infoAreaLayout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
-        );
+        previewPane.setBorder(null);
+        previewPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        previewPane.setPreferredSize(new java.awt.Dimension(500, 300));
+
+        previewTF.setEditable(false);
+        previewTF.setBackground(new java.awt.Color(255, 252, 216));
+        previewTF.setColumns(20);
+        previewTF.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        previewTF.setRows(5);
+        previewPane.setViewportView(previewTF);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        infoArea.add(previewPane, gridBagConstraints);
 
         getContentPane().add(infoArea, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-	
+
 	public void changeColor(JPanel hover, Color rand) {
 		hover.setBackground(rand);
-	}	
-	
+	}
+
     private void donationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_donationMouseEntered
-        changeColor(donation, new Color(222, 166, 58));
+		changeColor(donation, new Color(222, 166, 58));
     }//GEN-LAST:event_donationMouseEntered
 
     private void donationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_donationMouseExited
-        changeColor(donation, new Color(238, 210, 156));
+		changeColor(donation, new Color(238, 210, 156));
     }//GEN-LAST:event_donationMouseExited
 
     private void previewDonationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previewDonationMouseEntered
-        changeColor(previewDonation, new Color(222, 166, 58));
+		changeColor(previewDonation, new Color(222, 166, 58));
     }//GEN-LAST:event_previewDonationMouseEntered
 
     private void previewDonationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previewDonationMouseExited
-        changeColor(previewDonation, new Color(238, 210, 156));
+		changeColor(previewDonation, new Color(238, 210, 156));
     }//GEN-LAST:event_previewDonationMouseExited
 
     private void mainMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainMenuMouseEntered
-        changeColor(mainMenu, new Color(222, 166, 58));
+		changeColor(mainMenu, new Color(222, 166, 58));
     }//GEN-LAST:event_mainMenuMouseEntered
 
     private void mainMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainMenuMouseExited
-        changeColor(mainMenu, new Color(238, 210, 156));
+		changeColor(mainMenu, new Color(238, 210, 156));
     }//GEN-LAST:event_mainMenuMouseExited
 
     private void donationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_donationMouseClicked
-        FoodDonationGUI fdg = new FoodDonationGUI();
+		FoodDonationGUI fdg = new FoodDonationGUI();
 		fdg.setLocation(this.getLocation());
 		fdg.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_donationMouseClicked
-	
+
+    private void mainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainMenuMouseClicked
+		MainMenuGUI mainMenu = new MainMenuGUI();
+		mainMenu.setLocation(this.getLocation());
+		mainMenu.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_mainMenuMouseClicked
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -223,10 +245,12 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
     private javax.swing.JPanel donation;
     private javax.swing.JLabel headerText;
     private javax.swing.JPanel infoArea;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainMenu;
     private javax.swing.JLabel mainMenuLbl;
     private javax.swing.JPanel previewDonation;
     private javax.swing.JLabel previewDonationLbl;
+    private javax.swing.JLabel previewLbl;
+    private javax.swing.JScrollPane previewPane;
+    private javax.swing.JTextArea previewTF;
     // End of variables declaration//GEN-END:variables
 }

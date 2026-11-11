@@ -16,8 +16,8 @@ public class FoodBridgeApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FoodDonationGUI fd = new FoodDonationGUI();
-		fd.setVisible(true);
+		MainMenuGUI mm = new MainMenuGUI();
+		mm.setVisible(true);
     }
     
 }
