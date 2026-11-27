@@ -67,6 +67,7 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
         Menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         donation.setBackground(new java.awt.Color(238, 210, 156));
+        donation.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         donation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 donationMouseClicked(evt);
@@ -90,6 +91,7 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
         Menu.add(donation, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 100));
 
         previewDonation.setBackground(new java.awt.Color(238, 210, 156));
+        previewDonation.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         previewDonation.setPreferredSize(new java.awt.Dimension(250, 100));
         previewDonation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -111,6 +113,7 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
         Menu.add(previewDonation, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 100));
 
         mainMenu.setBackground(new java.awt.Color(238, 210, 156));
+        mainMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mainMenuMouseClicked(evt);
