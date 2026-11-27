@@ -7,8 +7,6 @@ package foodbridge;
 /**
  *
  * @author SWitkowski
- * @author UcheUche
- * @author Ethan
  */
 public class FoodBridgeApp {
 
@@ -16,7 +14,8 @@ public class FoodBridgeApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+		MainMenuGUI mm = new MainMenuGUI();
+		mm.setVisible(true);
     }
     
 }
