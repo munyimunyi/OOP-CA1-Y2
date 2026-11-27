@@ -2,48 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package foodbridge.fooddonations;
 
 /**
  *
  * @author SWitkowski
  */
-public class FoodDonations {
-	private int donationID;
-	private String donorName; // name of person or restaurant
+public class FoodDonations extends Donation {
+
 	private String foodName; // "Rice", "Chicken", etc.
 	private String foodCategory; // canned, dry, frozen, etc.
-	private String donationDate; // date of donation
 	private String unit; // kg, meals, grams, boxes, etc.
 	private String expiryDate; // when expires (could be used with donationDate)
 	private int quantity; // number of units (kg, boxes, etc.)
 
 	public FoodDonations(int donationID, String donorName, String foodName, String foodCategory, String donationDate, String unit, String expiryDate, int quantity) {
-		this.donationID = donationID;
-		this.donorName = donorName;
+		super(donationID, donorName, donationDate);
 		this.foodName = foodName;
 		this.foodCategory = foodCategory;
-		this.donationDate = donationDate;
 		this.unit = unit;
 		this.expiryDate = expiryDate;
 		this.quantity = quantity;
-	}
-
-	public int getDonationID() {
-		return donationID;
-	}
-
-	public void setDonationID(int donationID) {
-		this.donationID = donationID;
-	}
-
-	public String getDonorName() {
-		return donorName;
-	}
-
-	public void setDonorName(String donorName) {
-		this.donorName = donorName;
 	}
 
 	public String getFoodName() {
@@ -60,14 +39,6 @@ public class FoodDonations {
 
 	public void setFoodCategory(String foodCategory) {
 		this.foodCategory = foodCategory;
-	}
-
-	public String getDonationDate() {
-		return donationDate;
-	}
-
-	public void setDonationDate(String donationDate) {
-		this.donationDate = donationDate;
 	}
 
 	public String getUnit() {
@@ -95,7 +66,42 @@ public class FoodDonations {
 			this.quantity = quantity;
 		}
 	}
-	
-	
-	
+
+	@Override
+	public String getItemName() {
+		return foodName;
+	}
+
+	@Override
+	public String getSummary() {
+		return "Donation #" + getDonationID()
+				+ "\nDonor: " + getDonorName()
+				+ "\nFood: " + getFoodName() + " (" + getFoodCategory() + ")"
+				+ "\nQuantity: " + getQuantity() + " " + getUnit()
+				+ "\nDonated: " + getDonationDate() + " | Expires: " + getExpiryDate();
+	}
+
+	@Override
+	public String toFileLine() {
+		return getDonationID() + "|" + getDonorName() + "|" + getFoodName() + "|" + getFoodCategory() + "|" + getDonationDate() + "|" + getUnit() + "|" + getExpiryDate() + "|" + getQuantity();
+	}
+
+	public static FoodDonations fromFileLine(String line) {
+		/**
+		 * double \ needed because \ is a special character
+		 * \  needed because | is a special character in regex (OR operator)
+		 * "\\" escapes both special characters ('\', '|')
+		 */
+		// cuts line at each '|'
+		String[] p = line.split("\\|");
+		if (p.length != 8) {
+			return null;
+		}
+		try {
+			return new FoodDonations(Integer.parseInt(p[0]), p[1], p[2], p[3], p[4], p[5], p[6], Integer.parseInt(p[7]));
+		} catch (NumberFormatException e) {
+			// return null so app doesn't crash if something is wrong
+			return null;
+		}
+	}
 }
