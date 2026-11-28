@@ -7,6 +7,11 @@ package foodbridge.fooddonations;
 import foodbridge.MainMenuGUI;
 import java.awt.Color;
 import javax.swing.JPanel;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  *
@@ -205,6 +210,7 @@ public class FoodDonationGUI extends javax.swing.JFrame {
         submitBtn.setText("Submit");
         submitBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         submitBtn.setPreferredSize(new java.awt.Dimension(120, 35));
+        submitBtn.addActionListener(this::submitBtnActionPerformed);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -318,18 +324,60 @@ public class FoodDonationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mainMenuMouseExited
 
     private void previewDonationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previewDonationMouseClicked
-        PreviewDonationGUI pdg = new PreviewDonationGUI();
+		PreviewDonationGUI pdg = new PreviewDonationGUI();
 		pdg.setLocation(this.getLocation());
 		pdg.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_previewDonationMouseClicked
 
     private void mainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainMenuMouseClicked
-        MainMenuGUI mainMenu = new MainMenuGUI();
-		mainMenu.setLocation(this.getLocation());
-		mainMenu.setVisible(true);
+		MainMenuGUI mm = new MainMenuGUI();
+		mm.setLocation(this.getLocation());
+		mm.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_mainMenuMouseClicked
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+		String donor = donorNameTF.getText().trim();
+		String food = foodNameTF.getText().trim();
+		String category = (String) foodCategoryCB.getSelectedItem();
+		String unit = (String) unitCB.getSelectedItem();
+		int quantity = (int) quantitySpinner.getValue();
+		Date expiry = (Date) expiryDateTF.getValue();
+
+		if (donor.isEmpty() || food.isEmpty() || category == null || unit == null || expiry == null) {
+			JOptionPane.showMessageDialog(this, "Please fill in every field.");
+			return;
+		}
+
+		// "|" is the file separator, so it can't appear in text fields
+		if (donor.contains("|") || food.contains("|")) {
+			JOptionPane.showMessageDialog(this, "Please don't use the '|' character.");
+			return;
+		}
+
+		String expiryText = new SimpleDateFormat("dd/MM/yyyy").format(expiry);
+		String today = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+		
+		// toInstant creates a date at the same time as current date
+		// atZone sets timezone to system default (GMT)
+		LocalDate expiryDay = expiry.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		if (expiryDay.isBefore(LocalDate.now())) {
+			JOptionPane.showMessageDialog(this, "This food has already expired and can't be donated.");
+			return;
+		}
+		
+		DonationManager dm = DonationManager.getInstance();
+		dm.add(new FoodDonations(dm.nextID(), donor, food, category, today, unit, expiryText, quantity));
+
+		JOptionPane.showMessageDialog(this, "Donation Saved.");
+		donorNameTF.setText("");
+		foodNameTF.setText("");
+		foodCategoryCB.setSelectedIndex(-1);
+		unitCB.setSelectedIndex(-1);
+		quantitySpinner.setValue(1);
+		expiryDateTF.setValue(null);
+    }//GEN-LAST:event_submitBtnActionPerformed
 
 	/**
 	 * @param args the command line arguments

@@ -25,6 +25,10 @@ public class Donation implements FileSaveable {
 		return donationID;
 	}
 
+	public void setDonationID(int donationID) {
+		this.donationID = donationID;
+	}
+	
 	public String getDonorName() {
 		return donorName;
 	}

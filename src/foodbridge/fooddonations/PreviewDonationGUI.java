@@ -6,6 +6,8 @@ package foodbridge.fooddonations;
 
 import foodbridge.MainMenuGUI;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +23,19 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
 	 */
 	public PreviewDonationGUI() {
 		initComponents();
+		showDonations(DonationManager.getInstance().getAll());
+	}
+
+	public void showDonations(ArrayList<Donation> list) {
+		previewTF.setText("");
+		if (list.isEmpty()) {
+			previewTF.setText("No donations found.");
+			return;
+		}
+		for (Donation d : list) {
+			previewTF.append(d.getSummary() + "\n\n"); // each object builds own summary
+		}
+		previewTF.setCaretPosition(0); // scrolls back to top
 	}
 
 	/**
@@ -43,9 +58,13 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
         mainMenu = new javax.swing.JPanel();
         mainMenuLbl = new javax.swing.JLabel();
         infoArea = new javax.swing.JPanel();
-        previewLbl = new javax.swing.JLabel();
+        searchLbl = new javax.swing.JLabel();
         previewPane = new javax.swing.JScrollPane();
         previewTF = new javax.swing.JTextArea();
+        searchBTN = new javax.swing.JButton();
+        displayAllBTN = new javax.swing.JButton();
+        deleteBTN = new javax.swing.JButton();
+        searchdeleteTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -142,14 +161,15 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
         infoArea.setPreferredSize(new java.awt.Dimension(550, 450));
         infoArea.setLayout(new java.awt.GridBagLayout());
 
-        previewLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        previewLbl.setText("Preview");
+        searchLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchLbl.setText("Search by Food or Donor name | Delete by ID");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        infoArea.add(previewLbl, gridBagConstraints);
+        infoArea.add(searchLbl, gridBagConstraints);
 
         previewPane.setBorder(null);
         previewPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -164,11 +184,59 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         infoArea.add(previewPane, gridBagConstraints);
+
+        searchBTN.setText("Search");
+        searchBTN.addActionListener(this::searchBTNActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoArea.add(searchBTN, gridBagConstraints);
+
+        displayAllBTN.setText("Display All");
+        displayAllBTN.addActionListener(this::displayAllBTNActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoArea.add(displayAllBTN, gridBagConstraints);
+
+        deleteBTN.setText("Delete");
+        deleteBTN.addActionListener(this::deleteBTNActionPerformed);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoArea.add(deleteBTN, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoArea.add(searchdeleteTF, gridBagConstraints);
 
         getContentPane().add(infoArea, java.awt.BorderLayout.CENTER);
 
@@ -211,11 +279,40 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_donationMouseClicked
 
     private void mainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainMenuMouseClicked
-		MainMenuGUI mainMenu = new MainMenuGUI();
-		mainMenu.setLocation(this.getLocation());
-		mainMenu.setVisible(true);
+		MainMenuGUI mm = new MainMenuGUI();
+		mm.setLocation(this.getLocation());
+		mm.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_mainMenuMouseClicked
+
+    private void searchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTNActionPerformed
+		showDonations(DonationManager.getInstance().search(searchdeleteTF.getText()));
+    }//GEN-LAST:event_searchBTNActionPerformed
+
+    private void displayAllBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayAllBTNActionPerformed
+		showDonations(DonationManager.getInstance().getAll());
+    }//GEN-LAST:event_displayAllBTNActionPerformed
+
+    private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
+		try {
+			int id = Integer.parseInt(searchdeleteTF.getText().trim());
+			int confirm = JOptionPane.showConfirmDialog(this, "Delete donation #" + id + "?", "Confirm", JOptionPane.YES_NO_OPTION);
+			
+			if (confirm != JOptionPane.YES_OPTION) {
+				return;
+			}
+			
+			if (DonationManager.getInstance().delete(id)) {
+				searchdeleteTF.setText("");
+				showDonations(DonationManager.getInstance().getAll());
+			} else {
+				JOptionPane.showMessageDialog(this, "No donation with ID " + id + ".");
+			}
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Enter a whole number for the ID.");
+		}
+    }//GEN-LAST:event_deleteBTNActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -245,6 +342,8 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Header;
     private javax.swing.JPanel Menu;
+    private javax.swing.JButton deleteBTN;
+    private javax.swing.JButton displayAllBTN;
     private javax.swing.JLabel donateLbl;
     private javax.swing.JPanel donation;
     private javax.swing.JLabel headerText;
@@ -253,8 +352,10 @@ public class PreviewDonationGUI extends javax.swing.JFrame {
     private javax.swing.JLabel mainMenuLbl;
     private javax.swing.JPanel previewDonation;
     private javax.swing.JLabel previewDonationLbl;
-    private javax.swing.JLabel previewLbl;
     private javax.swing.JScrollPane previewPane;
     private javax.swing.JTextArea previewTF;
+    private javax.swing.JButton searchBTN;
+    private javax.swing.JLabel searchLbl;
+    private javax.swing.JTextField searchdeleteTF;
     // End of variables declaration//GEN-END:variables
 }
